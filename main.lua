@@ -991,7 +991,7 @@ WhatsAppSection:Button({
     Desc = "Click to copy WhatsApp group link",
     Callback = function()
         if setclipboard then
-            setclipboard("https://chat.whatsapp.com/I8hG44FLgrRAwQcS3lvEft")
+            setclipboard("https://chat.whatsapp.com/HEo9aXAzdfe3CQPDhlg2o8")
             ShowNotification("Success", "WhatsApp link copied to clipboard!", 3)
         else
             ShowNotification("Error", "Clipboard not supported!", 2)
