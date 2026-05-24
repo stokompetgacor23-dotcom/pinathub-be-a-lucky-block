@@ -1,7 +1,7 @@
+repeat task.wait() until game:IsLoaded()
+
 -- =======================================================
--- PINATHUB - BE A LUCKY BLOCK (WINDUI)
--- All features from original script + Infinite Jump
--- FINAL VERSION - Settings Tab Removed
+-- PINATHUB | BE A LUCKY BLOCK (WINDUI v2)
 -- =======================================================
 
 local Players = game:GetService("Players")
@@ -170,8 +170,8 @@ logoGui.Parent = Player:WaitForChild("PlayerGui", 5)
 
 local logoButton = Instance.new("ImageButton")
 logoButton.Name = "LogoButton"
-logoButton.Size = UDim2.new(0, 60, 0, 60)
-logoButton.Position = UDim2.new(0.5, -30, 0.5, -30)
+logoButton.Size = UDim2.new(0, 50, 0, 50)
+logoButton.Position = UDim2.new(0.5, -25, 0.5, -25)
 logoButton.BackgroundTransparency = 1
 logoButton.Image = "rbxassetid://118264723961739"
 logoButton.ImageColor3 = Color3.fromRGB(180, 0, 255)
@@ -182,16 +182,11 @@ local uiCorner = Instance.new("UICorner")
 uiCorner.CornerRadius = UDim.new(1, 0)
 uiCorner.Parent = logoButton
 
-local hoverTween = TweenService:Create(logoButton, TweenInfo.new(0.2), {Size = UDim2.new(0, 70, 0, 70)})
-local unhoverTween = TweenService:Create(logoButton, TweenInfo.new(0.2), {Size = UDim2.new(0, 60, 0, 60)})
+local hoverTween = TweenService:Create(logoButton, TweenInfo.new(0.2), {Size = UDim2.new(0, 60, 0, 60)})
+local unhoverTween = TweenService:Create(logoButton, TweenInfo.new(0.2), {Size = UDim2.new(0, 50, 0, 50)})
 
-logoButton.MouseEnter:Connect(function()
-    hoverTween:Play()
-end)
-
-logoButton.MouseLeave:Connect(function()
-    unhoverTween:Play()
-end)
+logoButton.MouseEnter:Connect(function() hoverTween:Play() end)
+logoButton.MouseLeave:Connect(function() unhoverTween:Play() end)
 
 local dragging = false
 local dragInput, dragStart, startPos
@@ -225,35 +220,22 @@ UIS.InputChanged:Connect(function(input)
 end)
 
 -- =======================================================
--- LOAD WINDUI
+-- LOAD WINDUI v2 (Swing Obby Style)
 -- =======================================================
-local WindUI = (function()
-    local success, result = pcall(function()
-        return loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua", true))()
-    end)
-    return success and result or nil
-end)()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-if not WindUI then 
-    ShowNotification("Error", "Failed to load WindUI Library", 5)
-    return 
-end
-
--- =======================================================
--- CREATE CUSTOM WINDOW
--- =======================================================
 local Window = WindUI:CreateWindow({
     Title = "PinatHub",
     Author = "@viunze on tiktok",
-    Folder = "PinatHub",
-    NewElements = true,
-    OpenButton = {
-        Enabled = false
-    },
-    Topbar = { Height = 44, ButtonsType = "Default" }
+    Folder = "pinathub",
+    Size = UDim2.fromOffset(500, 350),
+    Transparent = true,
+    Theme = "Dark",
+    IsOpenButtonEnabled = false,
+    UserEnabled = true,
+    HasOutline = true,
+    SideBarWidth = 150,
 })
-
-Window:Tag({ Title = "Be a Lucky Block Script", Icon = "star", Color = Color3.fromHex("#BA00FF"), Border = true })
 
 local guiVisible = true
 logoButton.MouseButton1Click:Connect(function()
